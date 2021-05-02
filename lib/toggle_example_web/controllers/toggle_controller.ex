@@ -59,16 +59,16 @@ defmodule ToggleExampleWeb.ToggleController do
   defp router_toggle(:external, false, conn), do: default_response(conn)
   defp router_toggle(:database, false, conn), do: default_response(conn)
 
-  defp response_toggle_on(conn) do
-    conn
-    |> put_status(:ok)
-    |> json(%{message: ">>>> CAIRÃO LADRÃO! 🦸🏻, ROUBOU MEU CORAÇÃO 💚 🤏🏻 !! ¡¡¡ 🟢 TA ON 🔛 🚦¡¡¡<<<<"})
-  end
-
   defp default_response(conn) do
     conn
     |> put_status(:ok)
     |> json(%{message: ":::::::::: 🔵 comportamento padrão 🔵 || -- 🔴 TOGGLE OFF 🔴 🤡 💤 ::::::::::"})
+  end
+
+  defp response_toggle_on(conn) do
+    conn
+    |> put_status(:ok)
+    |> json(%{message: ">>>> CAIRÃO LADRÃO! 🦸🏻, ROUBOU MEU CORAÇÃO 💚 🤏🏻 !! ¡¡¡ 🟢 TA ON 🔛 🚦¡¡¡<<<<"})
   end
 
   defp env_var_1 do

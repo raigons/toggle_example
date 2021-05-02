@@ -79,6 +79,10 @@ defmodule ToggleExampleWeb.ToggleController do
 
     Logger.warn("toggles=#{body}")
 
+    toggle_value(toggles, toggle_name)
+  end
+
+  defp toggle_value(toggles, toggle_name) do
     toggles
     |> Enum.reduce(%{}, fn toggle, acc ->
       [{key, value}] = Map.to_list(toggle)

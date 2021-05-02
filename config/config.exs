@@ -29,3 +29,12 @@ config :phoenix, :json_library, Jason
 # Import environment specific config. This must remain at the bottom
 # of this file so it overrides the configuration defined above.
 import_config "#{Mix.env()}.exs"
+
+to_boolean = fn
+  "true", _ -> true
+  "false", _ -> false
+  _, default -> default
+end
+
+config :toggle_example, :toggles,
+  env_var_toggle_1: to_boolean.(System.get_env("ENV_TOGGLE_1"), false)

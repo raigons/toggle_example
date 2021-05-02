@@ -7,6 +7,10 @@ defmodule ToggleExampleWeb.Router do
 
   scope "/api", ToggleExampleWeb do
     pipe_through :api
+
+    scope "/toggles" do
+      get "/hardcoded", ToggleController, :hardcoded
+    end
   end
 
   # Enables LiveDashboard only for development

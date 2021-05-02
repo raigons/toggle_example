@@ -27,13 +27,13 @@ defmodule ToggleExampleWeb.ToggleController do
   defp response_toggle_on(conn) do
     conn
     |> put_status(:ok)
-    |> json(%{message: ">>>> CAIRÃO LADRÃO!, ROUBOU MEU CORAÇÃO!! ¡¡¡TA ON¡¡¡<<<<"})
+    |> json(%{message: ">>>> CAIRÃO LADRÃO! 🦸🏻, ROUBOU MEU CORAÇÃO 💚 🤏🏻 !! ¡¡¡ 🟢 TA ON 🔛 🚦¡¡¡<<<<"})
   end
 
   defp response_toggle_off(conn) do
     conn
     |> put_status(:ok)
-    |> json(%{message: ":::::::::: TOGGLE OFF ::::::::::"})
+    |> json(%{message: ":::::::::: 🔴 TOGGLE OFF 🔴 🤡 💤 ::::::::::"})
   end
 
   defp env_var_1 do

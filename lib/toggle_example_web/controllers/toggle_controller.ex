@@ -4,6 +4,9 @@ defmodule ToggleExampleWeb.ToggleController do
 
   require Logger
 
+  alias ToggleExample.Toggles
+  alias ToggleExample.Toggles.Toggle
+
   # num ambiente de produção o deploy seria necessário
   # mas para um ambiente de dev pode ser ok
   # contudo para ambiente de testes não vai ser ideal
@@ -30,12 +33,26 @@ defmodule ToggleExampleWeb.ToggleController do
     router_toggle(:external, external_service_toggle("TOGGLE_1"), conn)
   end
 
+  #da mesma forma que de serviço externo, não necessita de deploy
+  def database(conn, _params) do
+    with %Toggle{value: value} <- Toggles.get_toggle_by_name("TOGGLE_1") do
+      router_toggle(:database, value, conn)
+    else
+      _ -> default_response(conn)
+    end
+  end
+
+  #toggle true
   defp router_toggle(:hard, true, conn), do: response_toggle_on(conn)
-  defp router_toggle(:hard, false, conn), do: response_toggle_off(conn)
   defp router_toggle(:env, true, conn), do: response_toggle_on(conn)
-  defp router_toggle(:env, false, conn), do: response_toggle_off(conn)
   defp router_toggle(:external, true, conn), do: response_toggle_on(conn)
-  defp router_toggle(:external, false, conn), do: response_toggle_off(conn)
+  defp router_toggle(:database, true, conn), do: response_toggle_on(conn)
+
+  #toggle false
+  defp router_toggle(:hard, false, conn), do: default_response(conn)
+  defp router_toggle(:env, false, conn), do: default_response(conn)
+  defp router_toggle(:external, false, conn), do: default_response(conn)
+  defp router_toggle(:database, false, conn), do: default_response(conn)
 
   defp response_toggle_on(conn) do
     conn
@@ -43,10 +60,10 @@ defmodule ToggleExampleWeb.ToggleController do
     |> json(%{message: ">>>> CAIRÃO LADRÃO! 🦸🏻, ROUBOU MEU CORAÇÃO 💚 🤏🏻 !! ¡¡¡ 🟢 TA ON 🔛 🚦¡¡¡<<<<"})
   end
 
-  defp response_toggle_off(conn) do
+  defp default_response(conn) do
     conn
     |> put_status(:ok)
-    |> json(%{message: ":::::::::: 🔴 TOGGLE OFF 🔴 🤡 💤 ::::::::::"})
+    |> json(%{message: ":::::::::: 🔵 comportamento padrão 🔵 || -- 🔴 TOGGLE OFF 🔴 🤡 💤 ::::::::::"})
   end
 
   defp env_var_1 do

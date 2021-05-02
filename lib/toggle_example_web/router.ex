@@ -12,6 +12,7 @@ defmodule ToggleExampleWeb.Router do
       get "/hardcoded", ToggleController, :hardcoded
       get "/env-var", ToggleController, :env_var
       get "/external-service", ToggleController, :external_service
+      get "/banco-de-dados", ToggleController, :database
     end
   end
 

@@ -11,6 +11,7 @@ defmodule ToggleExampleWeb.Router do
     scope "/toggles" do
       get "/hardcoded", ToggleController, :hardcoded
       get "/env-var", ToggleController, :env_var
+      get "/external-service", ToggleController, :external_service
     end
   end
 

@@ -6,6 +6,7 @@ defmodule ToggleExampleWeb.ToggleController do
 
   alias ToggleExample.Toggles
   alias ToggleExample.Toggles.Toggle
+  alias ToggleExample.Domain.{DomainLogic, DomainLogicFeatureX}
 
   @doc """
   num ambiente de produção o deploy seria necessário
@@ -60,14 +61,23 @@ defmodule ToggleExampleWeb.ToggleController do
   defp router_toggle(:database, false, conn), do: default_response(conn)
 
   defp default_response(conn) do
+    #o comportamento padrão também vai ter alguma lógica
+    DomainLogic.do_something()
+
     conn
     |> put_status(:ok)
     |> json(%{message: ":::::::::: 🔵 comportamento padrão 🔵 || -- 🔴 TOGGLE OFF 🔴 🤡 💤 ::::::::::"})
   end
 
   defp response_toggle_on(conn) do
+    #vou adicionar algum log
+    Logger.info("Alguma coisa importante")
+
+    #alguma lógica referente à funcionalidade nova
+    DomainLogicFeatureX.do_something()
+
     conn
-    |> put_status(:ok)
+    |> put_status(:created)
     |> json(%{message: ">>>> CAIRÃO!, LADRÃO! 🦸🏻, ROUBOU MEU CORAÇÃO 💚 🤏🏻 !! ¡¡¡ 🟢 TA ON 🔛 🚦¡¡¡<<<<"})
   end
 
